@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 from datetime import datetime
 import pytz
-import time
 import random
+import os
 
 app = Flask(__name__)
 
@@ -22,30 +22,38 @@ def home():
         "Your smile has a way of making everything feel lighter."
     ]
 
-     if request.method == "POST":
-         name = request.form["name"]
-         india = pytz.timezone("Asia/Kolkata")
-         timestamp = datetime.now(india).hour
+    if request.method == "POST":
+        name = request.form["name"]
 
-         if 6 <= timestamp < 12:
-             greeting = "Good Morning"
-             bg = "morning"
+        india = pytz.timezone("Asia/Kolkata")
+        timestamp = datetime.now(india).hour
 
-     elif 12 <= timestamp < 18:
-             greeting = "Good Afternoon"
-             bg = "afternoon"
+        if 6 <= timestamp < 12:
+            greeting = "Good Morning"
+            bg = "morning"
 
-     elif 18 <= timestamp < 22:
+        elif 12 <= timestamp < 18:
+            greeting = "Good Afternoon"
+            bg = "afternoon"
+
+        elif 18 <= timestamp < 22:
             greeting = "Good Evening"
             bg = "evening"
 
-     else:
+        else:
             greeting = "Good Night"
             bg = "night"
 
-     thought = random.choice(thoughts)
+        thought = random.choice(thoughts)
 
-     return render_template("index.html", greeting=greeting, name=name, thought=thought, bg=bg)
+    return render_template(
+        "index.html",
+        greeting=greeting,
+        name=name,
+        thought=thought,
+        bg=bg
+    )
 
- import os
- app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
