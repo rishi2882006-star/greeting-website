@@ -22,12 +22,12 @@ def home():
         "Your smile has a way of making everything feel lighter."
     ]
 
-  if request.method == "POST":
+     if request.method == "POST":
 
-    name = request.form["name"]
+     name = request.form["name"]
 
-    india = pytz.timezone("Asia/Kolkata")
-    timestamp = datetime.now(india).hour
+     india = pytz.timezone("Asia/Kolkata")
+      timestamp = datetime.now(india).hour
 
   if 6 <= timestamp < 12:
     greeting = "Good Morning"
