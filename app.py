@@ -23,32 +23,29 @@ def home():
     ]
 
      if request.method == "POST":
+         name = request.form["name"]
+         india = pytz.timezone("Asia/Kolkata")
+         timestamp = datetime.now(india).hour
 
-     name = request.form["name"]
+         if 6 <= timestamp < 12:
+             greeting = "Good Morning"
+             bg = "morning"
 
-     india = pytz.timezone("Asia/Kolkata")
-      timestamp = datetime.now(india).hour
+     elif 12 <= timestamp < 18:
+             greeting = "Good Afternoon"
+             bg = "afternoon"
 
-  if 6 <= timestamp < 12:
-    greeting = "Good Morning"
-    bg = "morning"
+     elif 18 <= timestamp < 22:
+            greeting = "Good Evening"
+            bg = "evening"
 
-elif 12 <= timestamp < 18:
-    greeting = "Good Afternoon"
-    bg = "afternoon"
+     else:
+            greeting = "Good Night"
+            bg = "night"
 
-elif 18 <= timestamp < 22:
-    greeting = "Good Evening"
-    bg = "evening"
+     thought = random.choice(thoughts)
 
-else:
-    greeting = "Good Night"
-    bg = "night"
+     return render_template("index.html", greeting=greeting, name=name, thought=thought, bg=bg)
 
-thought = random.choice(thoughts)
-
-return render_template("index.html", greeting=greeting, name=name, thought=thought, bg=bg)
-
-
-import os
-app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+ import os
+ app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
