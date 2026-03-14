@@ -22,33 +22,32 @@ def home():
         "Your smile has a way of making everything feel lighter."
     ]
 
-    if request.method == "POST":
+  if request.method == "POST":
 
-        name = request.form["name"]
+    name = request.form["name"]
 
-       india = pytz.timezone("Asia/Kolkata")
-       timestamp = datetime.now(india).hour
+    india = pytz.timezone("Asia/Kolkata")
+    timestamp = datetime.now(india).hour
 
-        if 6 <= timestamp < 12:
-            greeting = "Good Morning"
-            bg = "morning"
+  if 6 <= timestamp < 12:
+    greeting = "Good Morning"
+    bg = "morning"
 
-        elif 12 <= timestamp < 18:
-            greeting = "Good Afternoon"
-            bg = "afternoon"
+elif 12 <= timestamp < 18:
+    greeting = "Good Afternoon"
+    bg = "afternoon"
 
-        elif 18 <= timestamp < 22:
-            greeting = "Good Evening"
-            bg = "evening"
+elif 18 <= timestamp < 22:
+    greeting = "Good Evening"
+    bg = "evening"
 
-        else:
-            greeting = "Good Night"
-            bg = "night"
+else:
+    greeting = "Good Night"
+    bg = "night"
 
-        thought = random.choice(thoughts)
+thought = random.choice(thoughts)
 
-    return render_template("index.html", greeting=greeting, name=name, thought=thought, bg=bg)
-
+return render_template("index.html", greeting=greeting, name=name, thought=thought, bg=bg)
 
 
 import os
