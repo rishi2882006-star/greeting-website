@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+from datetime import datetime
+import pytz
 import time
 import random
 
@@ -24,7 +26,8 @@ def home():
 
         name = request.form["name"]
 
-        timestamp = int(time.strftime("%H"))
+       india = pytz.timezone("Asia/Kolkata")
+       timestamp = datetime.now(india).hour
 
         if 6 <= timestamp < 12:
             greeting = "Good Morning"
